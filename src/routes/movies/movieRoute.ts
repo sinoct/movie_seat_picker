@@ -3,7 +3,7 @@ import {
   createMovie,
   getMovie,
   getMovies,
-} from "../controllers/movieController";
+} from "../../controllers/movies/movieController";
 
 const router = Router();
 

@@ -8,9 +8,11 @@ import {
   ForeignKey,
   BelongsToMany,
   BelongsTo,
+  AllowNull,
 } from "sequelize-typescript";
 import Screening from "./Screening";
 import User from "./User";
+import Seat from "./Seat";
 
 @Table({
   tableName: "reservations",
@@ -23,6 +25,17 @@ class Reservation extends Model {
     defaultValue: DataType.UUIDV4,
   })
   declare id: string;
+
+  @Column({
+    type: DataType.ENUM("PENDING", "RESERVED", "DECLINED"),
+  })
+  declare status: "PENDING" | "RESERVED | DECLINED";
+
+  @Column({
+    type: DataType.ARRAY(DataType.UUID),
+    allowNull: false,
+  })
+  declare selected_seats: number[];
 
   @ForeignKey(() => Screening)
   @Column({
@@ -41,11 +54,6 @@ class Reservation extends Model {
 
   @BelongsTo(() => User)
   user: User | undefined;
-
-  @Column({
-    type: DataType.ENUM("PENDING", "RESERVED", "DECLINED"),
-  })
-  declare status: "PENDING" | "RESERVED | DECLINED";
 }
 
 export default Reservation;

@@ -5,12 +5,14 @@ import Movie from "./db/models/Movie";
 import Reservation from "./db/models/Reservation";
 import Screening from "./db/models/Screening";
 import User from "./db/models/User";
-import MovieRouter from "./routes/movieRoute";
+import MovieRouter from "./routes/movies/movieRoute";
 import sequelize from "./db/connection";
 
 dotenv.config();
 
 const app = express();
+
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.status(200).json({

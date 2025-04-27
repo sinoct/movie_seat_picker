@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import Movie from "../db/models/Movie";
+import Movie from "../../db/models/Movie";
 
 const getMovie = (req: Request, res: Response, next: NextFunction) => {
   res.json({

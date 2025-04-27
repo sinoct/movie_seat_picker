@@ -22,6 +22,15 @@ class User extends Model {
   declare id: string;
 
   @Column({
+    type: DataType.STRING(60),
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  })
+  declare password: string;
+
+  @Column({
     type: DataType.STRING,
     unique: true,
   })
