@@ -1,4 +1,6 @@
-import { Table, Column, Model, DataType } from "sequelize-typescript";
+import { Table, Column, Model, DataType, HasMany } from "sequelize-typescript";
+import Reservation from "./Reservation";
+import Screening from "./Screening";
 
 @Table({
   tableName: "rooms",
@@ -14,6 +16,7 @@ class Room extends Model {
 
   @Column({
     type: DataType.STRING,
+    unique: true,
   })
   declare name: string;
 
@@ -21,6 +24,12 @@ class Room extends Model {
     type: DataType.INTEGER,
   })
   declare capacity: number;
+
+  @HasMany(() => Screening)
+  screenings: Screening[] | undefined;
+
+  @HasMany(() => Reservation)
+  reservations: Reservation[] | undefined;
 }
 
 export default Room;

@@ -25,7 +25,7 @@ class Movie extends Model {
   @Column({
     type: DataType.STRING,
   })
-  declare tite: string;
+  declare title: string;
 
   @HasMany(() => Screening)
   screenings: Screening[] | undefined;

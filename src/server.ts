@@ -1,12 +1,12 @@
 import dotenv from "dotenv";
 import express from "express";
 import "./db/connection";
-import Movie from "./db/models/Movie";
-import Reservation from "./db/models/Reservation";
-import Screening from "./db/models/Screening";
-import User from "./db/models/User";
 import MovieRouter from "./routes/movies/movieRoute";
 import sequelize from "./db/connection";
+import UserRouter from "./routes/users/userRoute";
+import ScreeningRouter from "./routes/screenings/screeningRoute";
+import RoomsRouter from "./routes/rooms/roomRoute";
+import { errorHandler } from "./middlewares/error";
 
 dotenv.config();
 
@@ -21,16 +21,20 @@ app.get("/", (req, res) => {
   });
 });
 app.use("/api/movies", MovieRouter);
+app.use("/api/users", UserRouter);
+app.use("/api/screenings", ScreeningRouter);
+app.use("/api/rooms", RoomsRouter);
+
+app.use(errorHandler);
 
 async function startServer() {
   try {
-    await sequelize.sync({ force: true });
-    console.log("Database synced");
-
     sequelize.authenticate().then(() => {
       console.log("Connected to the database");
-      console.log(`Database name: ${JSON.stringify(sequelize.config)}`);
     });
+
+    await sequelize.sync({ alter: true });
+    console.log("Database synced");
 
     app.listen(process.env.PORT_NUMBER, () => {
       console.log("Server running on http://localhost:3000");

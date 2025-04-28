@@ -13,6 +13,7 @@ import {
 import Screening from "./Screening";
 import User from "./User";
 import Seat from "./Seat";
+import Room from "./Room";
 
 @Table({
   tableName: "reservations",
@@ -36,6 +37,15 @@ class Reservation extends Model {
     allowNull: false,
   })
   declare selected_seats: number[];
+
+  @ForeignKey(() => Room)
+  @Column({
+    type: DataType.UUID,
+  })
+  declare room_id: string;
+
+  @BelongsTo(() => Room)
+  room: Room | undefined;
 
   @ForeignKey(() => Screening)
   @Column({

@@ -12,6 +12,7 @@ import {
 } from "sequelize-typescript";
 import Movie from "./Movie";
 import Reservation from "./Reservation";
+import Room from "./Room";
 
 @Table({
   tableName: "screenings",
@@ -25,15 +26,6 @@ class Screening extends Model {
   })
   declare id: string;
 
-  @ForeignKey(() => Movie)
-  @Column({
-    type: DataType.UUID,
-  })
-  declare movie_id: string;
-
-  @BelongsTo(() => Movie)
-  movies: Movie | undefined;
-
   @Column({
     type: DataType.DATE,
   })
@@ -43,6 +35,24 @@ class Screening extends Model {
     type: DataType.DATE,
   })
   declare end_time: Date;
+
+  @ForeignKey(() => Movie)
+  @Column({
+    type: DataType.UUID,
+  })
+  declare movie_id: string;
+
+  @BelongsTo(() => Movie)
+  movies: Movie | undefined;
+
+  @ForeignKey(() => Room)
+  @Column({
+    type: DataType.UUID,
+  })
+  declare room_id: string;
+
+  @BelongsTo(() => Room)
+  room: Room | undefined;
 
   @HasMany(() => Reservation)
   reservations: Reservation[] | undefined;

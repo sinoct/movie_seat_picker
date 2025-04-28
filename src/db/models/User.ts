@@ -6,7 +6,9 @@ import {
   CreatedAt,
   UpdatedAt,
   HasMany,
+  BeforeCreate,
 } from "sequelize-typescript";
+import bcrypt from "bcrypt";
 import Reservation from "./Reservation";
 
 @Table({
@@ -36,8 +38,20 @@ class User extends Model {
   })
   declare email: string;
 
+  @Column({
+    type: DataType.STRING,
+  })
+  declare apiKey: string;
+
   @HasMany(() => Reservation)
   reservations: Reservation[] | undefined;
+
+  @BeforeCreate
+  static async hashPassword(user: User) {
+    if (user.password) {
+      user.password = await bcrypt.hash(user.password, 10); // 10 is the salt rounds
+    }
+  }
 }
 
 export default User;

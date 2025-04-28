@@ -1,7 +1,6 @@
 import { Router } from "express";
 import {
   createMovie,
-  getMovie,
   getMovies,
 } from "../../controllers/movies/movieController";
 
