@@ -3,16 +3,13 @@ import {
   Column,
   Model,
   DataType,
-  CreatedAt,
-  UpdatedAt,
   ForeignKey,
-  HasMany,
   BelongsTo,
-  BelongsToMany,
+  HasMany,
 } from "sequelize-typescript";
 import Movie from "./Movie";
-import Reservation from "./Reservation";
 import Room from "./Room";
+import Reservation from "./Reservation";
 
 @Table({
   tableName: "screenings",
@@ -43,7 +40,7 @@ class Screening extends Model {
   declare movie_id: string;
 
   @BelongsTo(() => Movie)
-  movies: Movie | undefined;
+  movie?: Movie;
 
   @ForeignKey(() => Room)
   @Column({
@@ -52,10 +49,10 @@ class Screening extends Model {
   declare room_id: string;
 
   @BelongsTo(() => Room)
-  room: Room | undefined;
+  room?: Room;
 
   @HasMany(() => Reservation)
-  reservations: Reservation[] | undefined;
+  reservations?: Reservation;
 }
 
 export default Screening;

@@ -3,15 +3,12 @@ import {
   Column,
   Model,
   DataType,
-  CreatedAt,
-  UpdatedAt,
   ForeignKey,
   HasMany,
   BelongsTo,
-  BelongsToMany,
 } from "sequelize-typescript";
 import Room from "./Room";
-import Reservation from "./Reservation";
+import ReservedSeats from "./ReservationSeat";
 
 @Table({
   tableName: "seats",
@@ -42,7 +39,10 @@ class Seat extends Model {
   declare room_id: string;
 
   @BelongsTo(() => Room)
-  rooms: Room | undefined;
+  room?: Room;
+
+  @HasMany(() => ReservedSeats)
+  reservedSeats?: ReservedSeats;
 }
 
 export default Seat;

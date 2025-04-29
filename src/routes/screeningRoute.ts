@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createScreening } from "../../controllers/screenings/screeningController";
+import { createScreening } from "../controllers/screeningController";
 
 const router = Router();
 

@@ -3,17 +3,15 @@ import {
   Column,
   Model,
   DataType,
-  CreatedAt,
-  UpdatedAt,
   ForeignKey,
-  BelongsToMany,
   BelongsTo,
-  AllowNull,
+  HasMany,
 } from "sequelize-typescript";
 import Screening from "./Screening";
 import User from "./User";
 import Seat from "./Seat";
 import Room from "./Room";
+import ReservedSeats from "./ReservationSeat";
 
 @Table({
   tableName: "reservations",
@@ -28,24 +26,14 @@ class Reservation extends Model {
   declare id: string;
 
   @Column({
-    type: DataType.ENUM("PENDING", "RESERVED", "DECLINED"),
+    type: DataType.ENUM("LOCKED", "RESERVED", "CANCELLED"),
   })
-  declare status: "PENDING" | "RESERVED | DECLINED";
+  declare status: "LOCKED" | "RESERVED" | "CANCELLED";
 
   @Column({
-    type: DataType.ARRAY(DataType.UUID),
-    allowNull: false,
+    type: DataType.STRING,
   })
-  declare selected_seats: number[];
-
-  @ForeignKey(() => Room)
-  @Column({
-    type: DataType.UUID,
-  })
-  declare room_id: string;
-
-  @BelongsTo(() => Room)
-  room: Room | undefined;
+  declare email: string;
 
   @ForeignKey(() => Screening)
   @Column({
@@ -54,16 +42,10 @@ class Reservation extends Model {
   declare screening_id: string;
 
   @BelongsTo(() => Screening)
-  screenings: Screening | undefined;
+  screening?: Screening;
 
-  @ForeignKey(() => User)
-  @Column({
-    type: DataType.UUID,
-  })
-  declare user_id: string;
-
-  @BelongsTo(() => User)
-  user: User | undefined;
+  @HasMany(() => ReservedSeats)
+  reservedSeats?: ReservedSeats;
 }
 
 export default Reservation;

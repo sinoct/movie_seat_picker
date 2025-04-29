@@ -1,13 +1,4 @@
-import {
-  Table,
-  Column,
-  Model,
-  DataType,
-  CreatedAt,
-  UpdatedAt,
-  BelongsTo,
-  HasMany,
-} from "sequelize-typescript";
+import { Table, Column, Model, DataType, HasMany } from "sequelize-typescript";
 import Screening from "./Screening";
 
 @Table({
@@ -28,7 +19,7 @@ class Movie extends Model {
   declare title: string;
 
   @HasMany(() => Screening)
-  screenings: Screening[] | undefined;
+  screenings?: Screening;
 }
 
 export default Movie;

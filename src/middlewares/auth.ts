@@ -10,12 +10,14 @@ export const authenticate = async (
 
   if (!apiKey) {
     res.status(401).json({ message: "You need to be logged in" });
+    return;
   }
 
   const user = await User.findOne({ where: { apiKey } });
 
   if (!user) {
     res.status(401).json({ message: "No user found" });
+    return;
   }
   req.user = user;
   next();

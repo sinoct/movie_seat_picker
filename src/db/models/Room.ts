@@ -1,10 +1,10 @@
 import { Table, Column, Model, DataType, HasMany } from "sequelize-typescript";
-import Reservation from "./Reservation";
 import Screening from "./Screening";
+import Seat from "./Seat";
 
 @Table({
   tableName: "rooms",
-  modelName: "Movie",
+  modelName: "Room",
 })
 class Room extends Model {
   @Column({
@@ -26,10 +26,10 @@ class Room extends Model {
   declare capacity: number;
 
   @HasMany(() => Screening)
-  screenings: Screening[] | undefined;
+  screenings?: Screening;
 
-  @HasMany(() => Reservation)
-  reservations: Reservation[] | undefined;
+  @HasMany(() => Seat)
+  seat?: Seat;
 }
 
 export default Room;

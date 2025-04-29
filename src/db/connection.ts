@@ -6,6 +6,7 @@ import Screening from "./models/Screening";
 import User from "./models/User";
 import Room from "./models/Room";
 import Seat from "./models/Seat";
+import ReservedSeats from "./models/ReservationSeat";
 
 dotenv.config();
 
@@ -16,8 +17,7 @@ const sequelize = new Sequelize({
   password: process.env.DB_PASSWORD,
   host: process.env.DB_HOST,
   port: Number(process.env.DB_PORT),
+  models: [Movie, Reservation, Screening, Room, Seat, ReservedSeats],
 });
-
-sequelize.addModels([Movie, Reservation, Screening, User, Room, Seat]);
 
 export default sequelize;

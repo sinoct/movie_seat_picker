@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import Screening from "../../db/models/Screening";
-import { validateScreening } from "../../utils/screening";
+import Screening from "../db/models/Screening";
+import { validateScreening } from "../utils/screening";
 
 const createScreening = async (
   req: Request,
