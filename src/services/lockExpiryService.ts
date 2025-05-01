@@ -1,5 +1,6 @@
 import cron from "node-cron";
 import { lockExpiration } from "./reservationsService";
+import { getTwentyMinutesBeforeDate } from "../utils/reservation";
 
 const startExpirationChecker = () => {
   cron.schedule("* * * * *", async () => {

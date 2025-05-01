@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { addReservation } from "../controllers/reservationController";
+import { lockSeats, reserveSeats } from "../controllers/reservationController";
 
 const router = Router();
 
-router.route("/").post(addReservation);
+router.route("/lock").post(lockSeats);
+router.route("/reserve").post(reserveSeats);
 
 export default router;

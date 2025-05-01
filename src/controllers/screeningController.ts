@@ -1,20 +1,48 @@
 import { Request, Response, NextFunction } from "express";
 import Screening from "../db/models/Screening";
 import { validateScreening } from "../utils/screening";
+import {
+  getAvailableScreenings,
+  getSeatAvailability,
+} from "../services/screeningService";
+import { formatSeatsInRows } from "../utils/seat";
 
 const createScreening = async (
-  req: Request,
+  req: Request<{}, {}, Screening>,
   res: Response,
   next: NextFunction
 ) => {
-  const body = req.body as Screening;
+  const body = req.body;
   const isScreeningValid = validateScreening(body);
   if (!isScreeningValid) {
     res.status(400).json({ message: "Invalid Screening" });
     return;
   }
-  const screening = await Screening.create(req.body);
+  const screening = await Screening.create({ ...body });
   res.status(200).json(screening);
 };
 
-export { createScreening };
+const fetchAvailableScreenings = async (
+  req: Request<{ movie_id: string }>,
+  res: Response,
+  next: NextFunction
+) => {
+  const params = req.params;
+  const screeenings = await getAvailableScreenings(params.movie_id);
+  res.status(200).json({ screeenings });
+};
+
+const fetchSeats = async (
+  req: Request<{ screening_id: string }>,
+  res: Response,
+  next: NextFunction
+) => {
+  const params = req.params;
+  const screening = await getSeatAvailability(params.screening_id);
+
+  const sortedFormattedSeats = await formatSeatsInRows(screening?.room?.seats!);
+
+  res.status(200).json({ sortedFormattedSeats });
+};
+
+export { createScreening, fetchAvailableScreenings, fetchSeats };

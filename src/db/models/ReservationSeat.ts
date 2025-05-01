@@ -11,9 +11,9 @@ import Reservation from "./Reservation";
 
 @Table({
   tableName: "reserved_seats",
-  modelName: "ReservedSeats",
+  modelName: "ReservedSeat",
 })
-class ReservedSeats extends Model {
+class ReservedSeat extends Model {
   @Column({
     primaryKey: true,
     type: DataType.UUID,
@@ -40,4 +40,4 @@ class ReservedSeats extends Model {
   seat?: Seat;
 }
 
-export default ReservedSeats;
+export default ReservedSeat;

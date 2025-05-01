@@ -30,7 +30,7 @@ const updateReservation = async (
 };
 
 const lockExpiration = async (expirationDate: Date) => {
-  const expired = await Reservation.update(
+  const [expired] = await Reservation.update(
     { status: ReservationType.CANCELLED },
     {
       where: {
@@ -39,6 +39,7 @@ const lockExpiration = async (expirationDate: Date) => {
       },
     }
   );
+  console.log(`Cancelled ${expired} number of reservations`);
 };
 
 export { createReservation, updateReservation, lockExpiration };

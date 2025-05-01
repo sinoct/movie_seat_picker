@@ -26,10 +26,10 @@ class Room extends Model {
   declare capacity: number;
 
   @HasMany(() => Screening)
-  screenings?: Screening;
+  screenings?: Screening[];
 
   @HasMany(() => Seat)
-  seat?: Seat;
+  seats?: Seat[];
 }
 
 export default Room;

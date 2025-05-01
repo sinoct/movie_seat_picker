@@ -1,15 +1,19 @@
-interface ReservationRequest {
-  email: string;
+interface LockRequest {
   screening_id: string;
   selected_seats: string[];
-  type: ReservationType;
+}
+
+interface ReservationRequest {
+  email: string;
+  screening_id?: string;
+  selected_seats?: string[];
   reservation_id?: string;
 }
 
 enum ReservationType {
   LOCKED = "LOCKED",
-  RESERVE = "RESERVED",
+  RESERVED = "RESERVED",
   CANCELLED = "CANCELLED",
 }
 
-export { ReservationRequest, ReservationType };
+export { LockRequest, ReservationRequest, ReservationType };

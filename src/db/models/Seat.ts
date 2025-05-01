@@ -8,7 +8,7 @@ import {
   BelongsTo,
 } from "sequelize-typescript";
 import Room from "./Room";
-import ReservedSeats from "./ReservationSeat";
+import ReservedSeat from "./ReservationSeat";
 
 @Table({
   tableName: "seats",
@@ -41,8 +41,8 @@ class Seat extends Model {
   @BelongsTo(() => Room)
   room?: Room;
 
-  @HasMany(() => ReservedSeats)
-  reservedSeats?: ReservedSeats;
+  @HasMany(() => ReservedSeat)
+  reservedSeat?: ReservedSeat[];
 }
 
 export default Seat;

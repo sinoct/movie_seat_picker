@@ -8,10 +8,8 @@ import {
   HasMany,
 } from "sequelize-typescript";
 import Screening from "./Screening";
-import User from "./User";
-import Seat from "./Seat";
-import Room from "./Room";
-import ReservedSeats from "./ReservationSeat";
+import ReservedSeat from "./ReservationSeat";
+import { ReservationType } from "../../types/reservation";
 
 @Table({
   tableName: "reservations",
@@ -28,7 +26,7 @@ class Reservation extends Model {
   @Column({
     type: DataType.ENUM("LOCKED", "RESERVED", "CANCELLED"),
   })
-  declare status: "LOCKED" | "RESERVED" | "CANCELLED";
+  declare status: ReservationType;
 
   @Column({
     type: DataType.STRING,
@@ -44,8 +42,8 @@ class Reservation extends Model {
   @BelongsTo(() => Screening)
   screening?: Screening;
 
-  @HasMany(() => ReservedSeats)
-  reservedSeats?: ReservedSeats;
+  @HasMany(() => ReservedSeat)
+  reservedSeats?: ReservedSeat;
 }
 
 export default Reservation;
