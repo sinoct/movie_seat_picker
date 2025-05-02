@@ -55,6 +55,9 @@ const validatefetchSeats = async (
   next: NextFunction
 ) => {
   const { screening_id } = req.params;
+  if (!screening_id) {
+    res.status(404).json({ message: "Screening Id is required" });
+  }
   const screening = await getScreening(screening_id);
   if (!screening) {
     res.status(404).json({ message: "Screening not found" });

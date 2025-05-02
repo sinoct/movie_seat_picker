@@ -16,10 +16,9 @@ const validateReservationRequest = async (
   next: NextFunction
 ) => {
   const { email, reservation_id, selected_seats, screening_id } = req.body;
-
   if (
     !email ||
-    !(!reservation_id || (selected_seats?.length === 0 && !screening_id))
+    (!reservation_id && (selected_seats?.length === 0 || !screening_id))
   ) {
     res.status(400).json({ message: "Invalid request body" });
     return;
