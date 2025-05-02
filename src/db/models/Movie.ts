@@ -15,6 +15,7 @@ class Movie extends Model {
 
   @Column({
     type: DataType.STRING,
+    unique: true,
   })
   declare title: string;
 

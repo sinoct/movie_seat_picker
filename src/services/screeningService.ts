@@ -43,4 +43,9 @@ const getSeatAvailability = async (screening_id: string) => {
   return screening;
 };
 
-export { getAvailableScreenings, getSeatAvailability };
+const getScreening = async (screening_id: string) => {
+  const screening = await Screening.findByPk(screening_id);
+  return screening;
+};
+
+export { getAvailableScreenings, getSeatAvailability, getScreening };

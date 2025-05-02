@@ -42,4 +42,27 @@ const lockExpiration = async (expirationDate: Date) => {
   console.log(`Cancelled ${expired} number of reservations`);
 };
 
-export { createReservation, updateReservation, lockExpiration };
+const revokeReservation = async (reservation_id: string) => {
+  const reservation = await Reservation.update(
+    { status: ReservationType.CANCELLED },
+    {
+      where: {
+        id: reservation_id,
+      },
+    }
+  );
+  return reservation;
+};
+
+const getReservation = async (reservation_id: string) => {
+  const reservation = await Reservation.findByPk(reservation_id);
+  return reservation;
+};
+
+export {
+  createReservation,
+  updateReservation,
+  lockExpiration,
+  revokeReservation,
+  getReservation,
+};

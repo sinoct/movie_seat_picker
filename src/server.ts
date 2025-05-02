@@ -9,6 +9,7 @@ import RoomsRouter from "./routes/roomRoute";
 import ReservationRouter from "./routes/reservationRoute";
 import { errorHandler } from "./middlewares/error";
 import { startExpirationChecker } from "./services/lockExpiryService";
+import { invalidRouteHandler } from "./middlewares/invalidRoute";
 
 dotenv.config();
 
@@ -21,6 +22,8 @@ app.use("/api/users", UserRouter);
 app.use("/api/screenings", ScreeningRouter);
 app.use("/api/rooms", RoomsRouter);
 app.use("/api/reservations", ReservationRouter);
+
+app.use(invalidRouteHandler);
 
 app.use(errorHandler);
 

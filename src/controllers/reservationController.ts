@@ -1,5 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import { updateReservation } from "../services/reservationsService";
+import {
+  revokeReservation,
+  updateReservation,
+} from "../services/reservationsService";
 import {
   LockRequest,
   ReservationType,
@@ -44,8 +47,19 @@ const reserveSeats = async (
       body.selected_seats,
       body.email
     );
+
     res.status(200).json({ message: "Reservation Reserved", reservation });
   }
 };
 
-export { lockSeats, reserveSeats };
+const cancelReservation = async (
+  req: Request<{ reservation_id: string }>,
+  res: Response,
+  next: NextFunction
+) => {
+  const params = req.params;
+  const reservation = await revokeReservation(params.reservation_id);
+  res.status(200).json({ reservation });
+};
+
+export { lockSeats, reserveSeats, cancelReservation };

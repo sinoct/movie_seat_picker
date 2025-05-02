@@ -5,4 +5,9 @@ const createRoom = async (name: string, capacity: number) => {
   return room;
 };
 
-export { createRoom };
+const fetchRoom = async (room_id: string) => {
+  const room = await Room.findByPk(room_id);
+  return room;
+};
+
+export { createRoom, fetchRoom };

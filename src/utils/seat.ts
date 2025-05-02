@@ -2,7 +2,7 @@ import ReservedSeat from "../db/models/ReservationSeat";
 import Seat from "../db/models/Seat";
 import { ReservationType } from "../types/reservation";
 
-const formatSeatsInRows = async (seats: Seat[]) => {
+const formatSeatsInRows = (seats: Seat[]) => {
   const rows: formattedSeat[][] = [];
 
   seats.map((seat) => {
@@ -13,7 +13,7 @@ const formatSeatsInRows = async (seats: Seat[]) => {
       id: seat.id,
       row_number: seat.row_number,
       seat_number: seat.seat_number,
-      availability: checkSeatAvailability(seat),
+      availability: checkIfSeatIsAvailable(seat),
     };
     rows[seat.row_number].push(seatWithStatus);
   });
@@ -28,7 +28,7 @@ const formatSeatsInRows = async (seats: Seat[]) => {
   return rows;
 };
 
-const checkSeatAvailability = (seat: Seat) => {
+const checkIfSeatIsAvailable = (seat: Seat) => {
   if (!seat.reservedSeat || seat.reservedSeat.length === 0) {
     return true;
   }

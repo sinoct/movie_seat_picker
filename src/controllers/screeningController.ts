@@ -40,7 +40,7 @@ const fetchSeats = async (
   const params = req.params;
   const screening = await getSeatAvailability(params.screening_id);
 
-  const sortedFormattedSeats = await formatSeatsInRows(screening?.room?.seats!);
+  const sortedFormattedSeats = formatSeatsInRows(screening?.room?.seats!);
 
   res.status(200).json({ sortedFormattedSeats });
 };
