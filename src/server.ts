@@ -10,10 +10,17 @@ import ReservationRouter from "./routes/reservationRoute";
 import { errorHandler } from "./middlewares/error";
 import { startExpirationChecker } from "./services/lockExpiryService";
 import { invalidRouteHandler } from "./middlewares/invalidRoute";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.use(express.json());
 

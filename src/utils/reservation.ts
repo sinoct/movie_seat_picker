@@ -34,10 +34,10 @@ const addReservedSeats = async (
 };
 
 const addReservation = async (
+  email: string,
   type: ReservationType,
   screening_id: string,
-  selected_seats: string[],
-  email?: string
+  selected_seats: string[]
 ) => {
   const reservation = await createReservation(type, screening_id, email);
   await addReservedSeats(reservation.id, selected_seats);

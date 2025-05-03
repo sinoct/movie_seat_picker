@@ -7,10 +7,10 @@ import Reservation from "../db/models/Reservation";
 
 const getAvailableScreenings = async (movie_id: string) => {
   const currentDate = new Date();
-  const screeenings = await Screening.findAll({
-    where: { start_time: { [Op.gt]: currentDate } },
+  const screenings = await Screening.findAll({
+    where: { movie_id, start_time: { [Op.gt]: currentDate } },
   });
-  return screeenings;
+  return screenings;
 };
 
 const getSeatAvailability = async (screening_id: string) => {

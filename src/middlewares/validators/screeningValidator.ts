@@ -7,7 +7,7 @@ const validateScreeningcreation = async (
   req: Request<
     {},
     {},
-    { movie_id: string; room_id: string; start_time: Date; end_time: Date }
+    { movie_id: string; room_id: string; start_time: string; end_time: string }
   >,
   res: Response,
   next: NextFunction
@@ -24,12 +24,12 @@ const validateScreeningcreation = async (
   if (!room) {
     res.status(400).json({ message: "Room not found" });
   }
-  if (start_time.getTime() < new Date().getTime()) {
+  if (new Date(start_time).getTime() < new Date().getTime()) {
     res
       .status(400)
       .json({ message: "Screening has to start in a future date" });
   }
-  if (start_time.getTime() > end_time.getTime()) {
+  if (new Date(start_time).getTime() > new Date(end_time).getTime()) {
     res.status(400).json({ message: "Screening has to start before the time" });
   }
 

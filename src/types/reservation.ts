@@ -1,4 +1,5 @@
 interface LockRequest {
+  email: string;
   screening_id: string;
   selected_seats: string[];
 }

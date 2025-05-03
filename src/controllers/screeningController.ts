@@ -28,8 +28,8 @@ const fetchAvailableScreenings = async (
   next: NextFunction
 ) => {
   const params = req.params;
-  const screeenings = await getAvailableScreenings(params.movie_id);
-  res.status(200).json({ screeenings });
+  const screenings = await getAvailableScreenings(params.movie_id);
+  res.status(200).json({ screenings });
 };
 
 const fetchSeats = async (

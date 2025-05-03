@@ -1,5 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-import { createMovieService, fetchMovies } from "../services/movieService";
+import {
+  createMovieService,
+  fetchMovie,
+  fetchMovies,
+} from "../services/movieService";
 
 const createMovie = async (req: Request, res: Response, next: NextFunction) => {
   const movie = await createMovieService(req.body);
@@ -11,4 +15,10 @@ const getMovies = async (req: Request, res: Response, next: NextFunction) => {
   res.status(200).json(movies);
 };
 
-export { createMovie, getMovies };
+const getMovie = async (req: Request, res: Response, next: NextFunction) => {
+  const params = req.params;
+  const movies = await fetchMovie(params.movie_id);
+  res.status(200).json(movies);
+};
+
+export { createMovie, getMovies, getMovie };

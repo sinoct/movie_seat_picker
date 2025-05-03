@@ -15,11 +15,12 @@ const lockSeats = async (
   res: Response,
   next: NextFunction
 ) => {
-  const body = req.body;
+  const { email, screening_id, selected_seats } = req.body;
   const reservation = await addReservation(
+    email,
     ReservationType.LOCKED,
-    body.screening_id,
-    body.selected_seats
+    screening_id,
+    selected_seats
   );
 
   res.status(200).json({ message: "Reservation Locked", reservation });
@@ -42,10 +43,10 @@ const reserveSeats = async (
   }
   if (body.screening_id && body.selected_seats) {
     const reservation = await addReservation(
+      body.email,
       ReservationType.RESERVED,
       body.screening_id,
-      body.selected_seats,
-      body.email
+      body.selected_seats
     );
 
     res.status(200).json({ message: "Reservation Reserved", reservation });
