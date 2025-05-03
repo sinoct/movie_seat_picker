@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import { fetchMovie } from "../../services/movieService";
-import { fetchRoom } from "../../services/roomServicce";
+import { fetchRoom } from "../../services/roomService";
 import { getScreening } from "../../services/screeningService";
 
 const validateScreeningcreation = async (
   req: Request<
-    {},
-    {},
+    unknown,
+    unknown,
     { movie_id: string; room_id: string; start_time: string; end_time: string }
   >,
   res: Response,

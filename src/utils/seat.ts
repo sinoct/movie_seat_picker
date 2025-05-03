@@ -1,6 +1,7 @@
 import ReservedSeat from "../db/models/ReservationSeat";
 import Seat from "../db/models/Seat";
 import { ReservationType } from "../types/reservation";
+import { formattedSeat } from "../types/seat";
 
 const formatSeatsInRows = (seats: Seat[]) => {
   const rows: formattedSeat[][] = [];

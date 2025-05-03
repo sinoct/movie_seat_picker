@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import {
   revokeReservation,
   updateReservation,
@@ -11,9 +11,8 @@ import {
 import { addReservation } from "../utils/reservation";
 
 const lockSeats = async (
-  req: Request<{}, {}, LockRequest>,
-  res: Response,
-  next: NextFunction
+  req: Request<unknown, unknown, LockRequest>,
+  res: Response
 ) => {
   const { email, screening_id, selected_seats } = req.body;
   const reservation = await addReservation(
@@ -27,9 +26,8 @@ const lockSeats = async (
 };
 
 const reserveSeats = async (
-  req: Request<{}, {}, ReservationRequest>,
-  res: Response,
-  next: NextFunction
+  req: Request<unknown, unknown, ReservationRequest>,
+  res: Response
 ) => {
   const body = req.body;
   if (body.reservation_id) {
@@ -55,8 +53,7 @@ const reserveSeats = async (
 
 const cancelReservation = async (
   req: Request<{ reservation_id: string }>,
-  res: Response,
-  next: NextFunction
+  res: Response
 ) => {
   const params = req.params;
   const reservation = await revokeReservation(params.reservation_id);

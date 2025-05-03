@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import Screening from "../db/models/Screening";
 import { validateScreening } from "../utils/screening";
 import {
@@ -8,9 +8,8 @@ import {
 import { formatSeatsInRows } from "../utils/seat";
 
 const createScreening = async (
-  req: Request<{}, {}, Screening>,
-  res: Response,
-  next: NextFunction
+  req: Request<unknown, unknown, Screening>,
+  res: Response
 ) => {
   const body = req.body;
   const isScreeningValid = validateScreening(body);
@@ -24,8 +23,7 @@ const createScreening = async (
 
 const fetchAvailableScreenings = async (
   req: Request<{ movie_id: string }>,
-  res: Response,
-  next: NextFunction
+  res: Response
 ) => {
   const params = req.params;
   const screenings = await getAvailableScreenings(params.movie_id);
@@ -34,13 +32,12 @@ const fetchAvailableScreenings = async (
 
 const fetchSeats = async (
   req: Request<{ screening_id: string }>,
-  res: Response,
-  next: NextFunction
+  res: Response
 ) => {
   const params = req.params;
   const screening = await getSeatAvailability(params.screening_id);
 
-  const sortedFormattedSeats = formatSeatsInRows(screening?.room?.seats!);
+  const sortedFormattedSeats = formatSeatsInRows(screening?.room?.seats || []);
 
   res.status(200).json({ sortedFormattedSeats });
 };

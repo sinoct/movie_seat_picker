@@ -1,9 +1,9 @@
-import Seat from "../db/models/Seat";
 import { createReservation } from "../services/reservationsService";
 import { createReservedSeat } from "../services/reservedSeatService";
 import { getSeatAvailability } from "../services/screeningService";
 import { getSeatsWithReservation } from "../services/seatService";
 import { ReservationType } from "../types/reservation";
+import { formattedSeat } from "../types/seat";
 import { formatSeatsInRows } from "./seat";
 
 const checkSeatAvailability = async (seats: string[], screening_id: string) => {
@@ -50,7 +50,7 @@ const checkForEmptySingleSeat = async (
 ) => {
   const seatAvailability = await getSeatAvailability(screening_id);
   const formattedSeatAvailability = formatSeatsInRows(
-    seatAvailability?.room?.seats!
+    seatAvailability?.room?.seats || []
   );
   const affectedRow = formattedSeatAvailability.filter(
     (row: formattedSeat[]) => {
@@ -61,15 +61,19 @@ const checkForEmptySingleSeat = async (
   let emptySeatsOnRight = 0;
   let before = true;
   let isEmptySingleSeat = false;
-  let areSeatsAdjacent = checkIfAdjacentSeats(
+  const areSeatsAdjacent = checkIfAdjacentSeats(
     affectedRow.filter((seat: formattedSeat) =>
       selected_seats.includes(seat.id)
     )
   );
-  for (let seat of affectedRow) {
+  for (const seat of affectedRow) {
     if (!selected_seats.includes(seat.id)) {
       if (before) {
-        seat.availability ? emptySeatsOnLeft++ : (emptySeatsOnLeft = 0);
+        if (seat.availability) {
+          emptySeatsOnLeft++;
+        } else {
+          emptySeatsOnLeft = 0;
+        }
       } else {
         if (seat.availability) {
           emptySeatsOnRight++;

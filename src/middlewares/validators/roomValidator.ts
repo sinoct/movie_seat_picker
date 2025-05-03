@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 const validateRoomCreation = async (
-  req: Request<{}, {}, { name: string; rows: number[] }>,
+  req: Request<unknown, unknown, { name: string; rows: number[] }>,
   res: Response,
   next: NextFunction
 ) => {

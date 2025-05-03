@@ -11,7 +11,7 @@ import {
 } from "../../utils/reservation";
 
 const validateReservationRequest = async (
-  req: Request<{}, {}, ReservationRequest>,
+  req: Request<unknown, unknown, ReservationRequest>,
   res: Response,
   next: NextFunction
 ) => {
@@ -77,7 +77,7 @@ const validateReservationRequest = async (
 };
 
 const validateLockRequest = async (
-  req: Request<{}, {}, LockRequest>,
+  req: Request<unknown, unknown, LockRequest>,
   res: Response,
   next: NextFunction
 ) => {

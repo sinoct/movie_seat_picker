@@ -1,10 +1,7 @@
 import { validateReservationRequest } from "../middlewares/validators/reservationValidator"; // Adjust the import path
 import { getReservation } from "../services/reservationsService";
 import { ReservationRequest, ReservationType } from "../types/reservation";
-import {
-  checkSeatAvailability,
-  checkForEmptySingleSeat,
-} from "../utils/reservation";
+import { checkSeatAvailability } from "../utils/reservation";
 import { Request, Response, NextFunction } from "express";
 import { createRequest, createResponse } from "node-mocks-http";
 
@@ -18,7 +15,7 @@ jest.mock("../utils/reservation", () => ({
 }));
 
 describe("validateReservationRequest", () => {
-  let req: Request<{}, {}, ReservationRequest>;
+  let req: Request<unknown, unknown, ReservationRequest>;
   let res: Response;
   let next: NextFunction;
 

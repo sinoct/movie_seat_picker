@@ -1,9 +1,7 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import User from "../db/models/User";
 
-const createUser = async (req: Request, res: Response, next: NextFunction) => {
-  const body = req.body as User;
-
+const createUser = async (req: Request, res: Response) => {
   const apiKey = crypto.randomUUID();
   const user = (await User.create({ ...req.body, apiKey })) || null;
   if (user) {

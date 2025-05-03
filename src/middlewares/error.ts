@@ -1,12 +1,7 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { ValidationError } from "sequelize";
 
-const errorHandler = (
-  err: any,
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const errorHandler = (err: unknown, req: Request, res: Response) => {
   if (err instanceof ValidationError) {
     res.status(400).json({
       message: "Validation error",
@@ -18,18 +13,7 @@ const errorHandler = (
     return;
   }
 
-  if (err.name === "SequelizeUniqueConstraintError") {
-    res.status(409).json({
-      message: "Unique field already exists",
-      errors: err.errors.map((e: any) => ({
-        field: e.path,
-        message: e.message,
-      })),
-    });
-    return;
-  }
-
-  console.error(err); // Log for debugging
+  console.error(err);
   res.status(500).json({ message: "Internal server error" });
 };
 

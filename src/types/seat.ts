@@ -10,3 +10,5 @@ interface formattedSeat {
   seat_number: number;
   availability: boolean;
 }
+
+export { unformattedSeat, formattedSeat };

@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import Movie from "./models/Movie";
 import Reservation from "./models/Reservation";
 import Screening from "./models/Screening";
-import User from "./models/User";
 import Room from "./models/Room";
 import Seat from "./models/Seat";
 import ReservedSeat from "./models/ReservationSeat";
