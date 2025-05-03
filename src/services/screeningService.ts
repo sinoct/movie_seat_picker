@@ -9,6 +9,7 @@ const getAvailableScreenings = async (movie_id: string) => {
   const currentDate = new Date();
   const screenings = await Screening.findAll({
     where: { movie_id, start_time: { [Op.gt]: currentDate } },
+    include: [{ model: Room }],
   });
   return screenings;
 };
