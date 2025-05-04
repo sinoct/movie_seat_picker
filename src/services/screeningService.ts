@@ -10,6 +10,7 @@ const getAvailableScreenings = async (movie_id: string) => {
   const screenings = await Screening.findAll({
     where: { movie_id, start_time: { [Op.gt]: currentDate } },
     include: [{ model: Room }],
+    order: [["start_time", "ASC"]],
   });
   return screenings;
 };
@@ -49,4 +50,34 @@ const getScreening = async (screening_id: string) => {
   return screening;
 };
 
-export { getAvailableScreenings, getSeatAvailability, getScreening };
+const fetchScreeningsForTimeRange = async (
+  startTime: string,
+  endTime: string,
+  roomId: string
+) => {
+  const screenings = await Screening.findAll({
+    where: {
+      room_id: roomId,
+      [Op.or]: [
+        {
+          start_time: {
+            [Op.between]: [startTime, endTime],
+          },
+        },
+        {
+          end_time: {
+            [Op.between]: [startTime, endTime],
+          },
+        },
+      ],
+    },
+  });
+  return screenings;
+};
+
+export {
+  getAvailableScreenings,
+  getSeatAvailability,
+  getScreening,
+  fetchScreeningsForTimeRange,
+};

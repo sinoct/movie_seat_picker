@@ -34,10 +34,7 @@ const validateReservationRequest = async (
       res.status(400).json({ message: "Reservation was cancelled" });
       return;
     }
-    if (
-      reservation.email !== email ||
-      reservation.status !== ReservationType.LOCKED
-    ) {
+    if (reservation.status !== ReservationType.LOCKED) {
       res.status(400).json({ message: "Seats already reserved" });
       return;
     }

@@ -1,7 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import { fetchMovie } from "../../services/movieService";
 import { fetchRoom } from "../../services/roomService";
-import { getScreening } from "../../services/screeningService";
+import {
+  fetchScreeningsForTimeRange,
+  getScreening,
+} from "../../services/screeningService";
 
 const validateScreeningcreation = async (
   req: Request<
@@ -24,6 +27,20 @@ const validateScreeningcreation = async (
   if (!room) {
     res.status(400).json({ message: "Room not found" });
   }
+  const screeningsInTimeFrame = await fetchScreeningsForTimeRange(
+    start_time,
+    end_time,
+    room_id
+  );
+
+  if (screeningsInTimeFrame.length > 0) {
+    res.status(400).json({
+      message:
+        "There is already a screening during this timeframe in the selected room",
+    });
+    return;
+  }
+
   if (new Date(start_time).getTime() < new Date().getTime()) {
     res
       .status(400)
