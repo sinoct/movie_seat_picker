@@ -23,3 +23,5 @@ At this point our postgres database should be up and running. Now run `npm i` af
 #### Testing
 You can run the tests for the application using `npm run dev`
 You can run the linter as well using `npm run lint`
+
+After this the application should be accessible on `http://localhost:3000`
