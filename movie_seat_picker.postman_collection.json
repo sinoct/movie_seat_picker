@@ -1,297 +1,245 @@
 {
-	"info": {
-		"_postman_id": "b4a7a992-5496-4b7d-8455-8e038b0862c3",
-		"name": "DT_use_case",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30705535"
-	},
-	"item": [
-		{
-			"name": "User",
-			"item": []
-		},
-		{
-			"name": "Movie",
-			"item": [
-				{
-					"name": "Create Movie",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"title\": \"Rambo\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/movies",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"movies"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Room",
-			"item": [
-				{
-					"name": "Create Room",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Room1\",\n    \"rows\": [11,12,11,12,11,12,11,12,11,12,11,12]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/rooms",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"rooms"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Screening",
-			"item": [
-				{
-					"name": "Create Screening",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/rooms",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"rooms"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Fetch screenings for movie",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"movie_id\": \"96243ac9-082e-4fc2-a846-e90671ee38bc\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/screenings/available",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"screenings",
-								"available"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Fetch seats for screening",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"movie_id\": \"96243ac9-082e-4fc2-a846-e90671ee38bc\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/screenings/available",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"screenings",
-								"available"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Reservation",
-			"item": [
-				{
-					"name": "Create Reservation by seats",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"test@mail.com\",\n    \"screening_id\": \"17c1bed3-698b-4faf-bbd5-56479df45185\"\n    \"selected_seats\": [\"b8ed5dcb-0f53-4c8c-96cd-1d3addd93936\", \"2b5b9d98-7e5c-4843-a1dc-18cb50b79475\", \"583b0363-e5ca-489d-b3a7-bb1c77c38a2d\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/reservations/reserve",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"reservations",
-								"reserve"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Reservation by reservationId",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"test@mail.com\",\n    \"screening_id\": \"17c1bed3-698b-4faf-bbd5-56479df45185\"\n    \"selected_seats\": [\"b8ed5dcb-0f53-4c8c-96cd-1d3addd93936\", \"2b5b9d98-7e5c-4843-a1dc-18cb50b79475\", \"583b0363-e5ca-489d-b3a7-bb1c77c38a2d\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/reservations/reserve",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"reservations",
-								"reserve"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Reservation lock",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"\",\n    \"screening_id\": \"a7276d26-f60f-4e62-87b2-778fffe1b92b\",\n    \"selected_seats\": [\"b8ed5dcb-0f53-4c8c-96cd-1d3addd93936\", \"2b5b9d98-7e5c-4843-a1dc-18cb50b79475\", \"583b0363-e5ca-489d-b3a7-bb1c77c38a2d\"],\n    \"type\": \"LOCK\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/reservations",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"reservations"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Cancel reservation",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"test@mail.com\",\n    \"screening_id\": \"17c1bed3-698b-4faf-bbd5-56479df45185\"\n    \"selected_seats\": [\"b8ed5dcb-0f53-4c8c-96cd-1d3addd93936\", \"2b5b9d98-7e5c-4843-a1dc-18cb50b79475\", \"583b0363-e5ca-489d-b3a7-bb1c77c38a2d\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/reservations/reserve",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"reservations",
-								"reserve"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		}
-	]
+  "info": {
+    "_postman_id": "b4a7a992-5496-4b7d-8455-8e038b0862c3",
+    "name": "DT_use_case",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "30705535"
+  },
+  "item": [
+    {
+      "name": "User",
+      "item": []
+    },
+    {
+      "name": "Movie",
+      "item": [
+        {
+          "name": "Create Movie",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Matrix\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/movies",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "movies"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Room",
+      "item": [
+        {
+          "name": "Create Room",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Room 3\",\n    \"rows\": [10,9,10,8,7,6,7,8,9,10, 9, 10]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/rooms",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "rooms"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Screening",
+      "item": [
+        {
+          "name": "Create Screening",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"start_time\": \"2025-05-10T15:00:00Z\",\n    \"end_time\": \"2025-05-10T17:00:00Z\",\n    \"movie_id\": \"f48c696c-bf8d-4383-8980-08eae07cc410\",\n    \"room_id\": \"aa93ada3-89dc-46d8-9e6c-5b52e02e1fd5\"\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/screenings",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "screenings"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Fetch screenings for movie",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/screenings/available/482bb570-3661-4455-9225-ad8f6e9fe06c",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": [
+                "api",
+                "screenings",
+                "available",
+                "482bb570-3661-4455-9225-ad8f6e9fe06c"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Fetch seats for screening",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/screenings/seats/10d58828-8efe-44b3-91df-1a3f6fd75c4f",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": [
+                "api",
+                "screenings",
+                "seats",
+                "10d58828-8efe-44b3-91df-1a3f6fd75c4f"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reservation",
+      "item": [
+        {
+          "name": "Create Reservation by seats",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"test@mail.com\",\n    \"screening_id\": \"10d58828-8efe-44b3-91df-1a3f6fd75c4f\",\n    \"selected_seats\": [\"dd069c61-5f79-40cc-8476-add92927504c\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/reservations/reserve",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "reservations", "reserve"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Reservation by reservationId",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"test@@mail.com\",\n    \"reservation_id\": \"4aa09362-03a8-43d6-9ff3-05c8579234f4\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/reservations/reserve",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "reservations", "reserve"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Reservation lock",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"screening_id\": \"10d58828-8efe-44b3-91df-1a3f6fd75c4f\",\n    \"selected_seats\": [\"4df43ddb-a030-44c4-85f7-a825eb2f8afa\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/reservations/lock",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "reservations", "lock"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel reservation",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/reservations/revoke/4b4faf07-7e4e-41f1-9a18-6bcca12d8167",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": [
+                "api",
+                "reservations",
+                "revoke",
+                "4b4faf07-7e4e-41f1-9a18-6bcca12d8167"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
 }
