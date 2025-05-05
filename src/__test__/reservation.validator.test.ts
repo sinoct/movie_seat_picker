@@ -1,4 +1,4 @@
-import { validateReservationRequest } from "../middlewares/validators/reservationValidator"; // Adjust the import path
+import { validateReservationRequest } from "../middlewares/validators/reservationValidator";
 import { getReservation } from "../services/reservationsService";
 import { ReservationRequest, ReservationType } from "../types/reservation";
 import { checkSeatAvailability } from "../utils/reservation";
