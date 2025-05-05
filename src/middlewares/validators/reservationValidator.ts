@@ -8,6 +8,7 @@ import { getReservation } from "../../services/reservationsService";
 import {
   checkForEmptySingleSeat,
   checkSeatAvailability,
+  emailRegex,
 } from "../../utils/reservation";
 
 const validateReservationRequest = async (
@@ -21,6 +22,11 @@ const validateReservationRequest = async (
     (!reservation_id && (selected_seats?.length === 0 || !screening_id))
   ) {
     res.status(400).json({ message: "Invalid request body" });
+    return;
+  }
+
+  if (!emailRegex.test(email)) {
+    res.status(400).json({ message: "Invalid email address" });
     return;
   }
 
