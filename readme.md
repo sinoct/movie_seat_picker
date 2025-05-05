@@ -25,3 +25,5 @@ You can run the tests for the application using `npm run dev`
 You can run the linter as well using `npm run lint`
 
 After this the application should be accessible on `http://localhost:3000`
+
+You can test the application either by using the included postman collection in `movie_seat_picker.postman_collection.json` or by using this other frontend application: [Frontend app](https://github.com/sinoct/movie_seat_picker_frontend "Frontend app")
